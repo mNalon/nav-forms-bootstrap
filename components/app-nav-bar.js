@@ -13,7 +13,7 @@ export default function AppNavBar({ children }){
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg" className="sticky-top">
         <Link href="/" passHref>
           <Navbar.Brand as="a">
             {APP_NAME}
