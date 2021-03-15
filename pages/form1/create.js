@@ -4,7 +4,7 @@ import { Breadcrumb, Form, Button } from 'react-bootstrap'
 
 import AppNavBar from '../../components/app-nav-bar'
 
-const Form1 = (id) => (
+const CreateForm = (id) => (
   <Form>
     <Form.Group>
       <Form.Label>Nome</Form.Label>
@@ -22,15 +22,17 @@ const Form1 = (id) => (
   </Form>
 )
  
-export default () => (
-  <AppNavBar>
-    <Breadcrumb>
-      <Link href="/form1" passHref>
-        <Breadcrumb.Item as="a">Form1</Breadcrumb.Item>
-      </Link>
-      <Breadcrumb.Item active>Create</Breadcrumb.Item>
-    </Breadcrumb>
+export default function Create(){
+  return(
+    <AppNavBar>
+      <Breadcrumb>
+        <Link href="/form1" passHref>
+          <Breadcrumb.Item as="a">Form1</Breadcrumb.Item>
+        </Link>
+        <Breadcrumb.Item active>Create</Breadcrumb.Item>
+      </Breadcrumb>
 
-    <Form1 />
-  </AppNavBar>
-)
+      <CreateForm />
+    </AppNavBar>
+  )
+}

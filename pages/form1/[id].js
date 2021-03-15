@@ -4,7 +4,7 @@ import { Breadcrumb, Form, Button } from 'react-bootstrap'
 
 import AppNavBar from '../../components/app-nav-bar'
 
-const Form1 = (id) => (
+const EditForm = (id) => (
   <Form>
     <Form.Group>
       <Form.Label>Nome</Form.Label>
@@ -22,22 +22,24 @@ const Form1 = (id) => (
   </Form>
 )
  
-const Form1Edit = ({ id }) => (
-  <AppNavBar>
-    <Breadcrumb>
-      <Link href="/form1" passHref>
-        <Breadcrumb.Item as="a">Form1</Breadcrumb.Item>
-      </Link>
-      <Breadcrumb.Item active>{ id }</Breadcrumb.Item>
-    </Breadcrumb>
+const Edit = function ({ id }) {
+  return (
+      <AppNavBar>
+        <Breadcrumb>
+          <Link href="/form1" passHref>
+            <Breadcrumb.Item as="a">Form1</Breadcrumb.Item>
+          </Link>
+          <Breadcrumb.Item active>{ id }</Breadcrumb.Item>
+        </Breadcrumb>
+    
+        <EditForm />
+      </AppNavBar>
+    )
+}
 
-    <Form1 />
-  </AppNavBar>
-)
 
-Form1Edit.getInitialProps = (ctx) => {
-  // here you should fetch the required data
+Edit.getInitialProps = (ctx) => {
   return {id: ctx.query.id}
 }
 
-export default Form1Edit
+export default Edit
