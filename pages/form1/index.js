@@ -3,7 +3,9 @@ import useSWR from 'swr'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
-import { 
+import PropTypes from 'prop-types'
+
+import {
   Breadcrumb,
   Button,
   Table,
@@ -12,12 +14,12 @@ import {
 
 import AppNavBar from '../../components/app-nav-bar'
 
-const ListItemRow = ({
+function ListItemRow ({
   id,
   name,
   description,
   onDeleteItem
-}) => {
+}) {
   const onClick = (event) => {
     event.preventDefault()
     const shouldDelete = confirm('Tem certeza que deseja deletar esse item?')
@@ -37,8 +39,14 @@ const ListItemRow = ({
   )
 }
 
-const ListItems = ({ items }) => {
+ListItemRow.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  onDeleteItem: PropTypes.func
+}
 
+function ListItems ({ items }) {
   const [currentItems, setCurrentItems] = useState(items)
 
   useEffect(() => {
@@ -48,16 +56,16 @@ const ListItems = ({ items }) => {
   const removeItemById = (id) => {
     const indexToRemove = currentItems.findIndex((item) => item.id === id)
     setCurrentItems([
-      ...currentItems.slice(0,indexToRemove),
-      ...currentItems.slice(indexToRemove+1)
+      ...currentItems.slice(0, indexToRemove),
+      ...currentItems.slice(indexToRemove + 1)
     ])
   }
-  
+
   const rowItems = currentItems.map(
     (item) => (
-      <ListItemRow 
-        {...item} 
-        key={item.id} 
+      <ListItemRow
+        {...item}
+        key={item.id}
         onDeleteItem={removeItemById}
       />
     )
@@ -78,23 +86,27 @@ const ListItems = ({ items }) => {
       </tbody>
     </Table>
   )
-} 
+}
+
+ListItems.propTypes = {
+  items: PropTypes.array.isRequired
+}
 
 const loadItems = () => {
   const { data, error } = useSWR('/api/form1', fetch)
-  if(error) return <Alert variant="danger">Ops! Ocorreu um erro :(</Alert>
-  if(!data) return <Alert variant="light">Carregando...</Alert>
-  
-  const { 
+  if (error) return <Alert variant="danger">Ops! Ocorreu um erro :(</Alert>
+  if (!data) return <Alert variant="light">Carregando...</Alert>
+
+  const {
     data: {
       items
-    } 
+    }
   } = data
 
   return <ListItems items={items} />
 }
 
-export default function List(){
+export default function List () {
   return (
     <AppNavBar>
       <Breadcrumb>

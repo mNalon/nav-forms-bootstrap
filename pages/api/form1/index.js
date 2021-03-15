@@ -2,10 +2,10 @@
 import { getAll, add } from './form1-items'
 
 export default (req, res) => {
-  if(req.method === 'POST') {
+  if (req.method === 'POST') {
     const createdItem = add(req.body)
     return res.status(200).json(createdItem)
   }
 
-  res.status(200).json({items: getAll()})
+  res.status(200).json({ items: getAll() })
 }

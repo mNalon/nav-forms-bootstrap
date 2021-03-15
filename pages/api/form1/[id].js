@@ -1,13 +1,13 @@
 import { getById, updateById, deleteById } from './form1-items'
 
 export default (req, res) => {
-  const { id: idUrlParam } =  req.query
+  const { id: idUrlParam } = req.query
 
   const id = parseInt(idUrlParam)
 
   const item = getById(id)
 
-  if(!item) {
+  if (!item) {
     res.status(404).json({ message: 'Item não encontrado' })
     return
   }
@@ -18,7 +18,7 @@ export default (req, res) => {
       description: newDescription
     } = req.body
 
-    let updatedItem = updateById(id, {
+    const updatedItem = updateById(id, {
       id,
       name: newName,
       description: newDescription

@@ -3,10 +3,11 @@ import { useRouter } from 'next/router'
 
 import { Navbar, Nav } from 'react-bootstrap'
 
+import PropTypes from 'prop-types'
+
 const APP_NAME = 'NavForm Bootstrap'
 
-export default function AppNavBar({ children }){
-
+export default function AppNavBar ({ children }) {
   const router = useRouter()
   const basePath = router.pathname.split('/')[1]
   const activeKey = `/${basePath}`
@@ -38,4 +39,8 @@ export default function AppNavBar({ children }){
       { children }
     </>
   )
+}
+
+AppNavBar.propTypes = {
+  children: PropTypes.any
 }
