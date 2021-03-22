@@ -1,4 +1,4 @@
-let form1Items = Array(30).fill()
+let form1Items = Array(15).fill()
 
 form1Items = form1Items.map(
   () => ({
