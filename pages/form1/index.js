@@ -25,6 +25,10 @@ function ListItemRow ({
     const shouldDelete = confirm('Tem certeza que deseja deletar esse item?')
     shouldDelete && fetch.delete(`/api/form1/${id}`)
       .then(() => onDeleteItem(id))
+      .catch((err) => {
+        console.error(err)
+        alert('Ocorreu um erro!')
+      })
   }
 
   return (
