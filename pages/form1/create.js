@@ -1,26 +1,49 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 import { Breadcrumb, Form, Button } from 'react-bootstrap'
+import fetch from 'axios'
 
 import AppNavBar from '../../components/app-nav-bar'
 
-const CreateForm = () => (
-  <Form>
-    <Form.Group>
-      <Form.Label>Nome</Form.Label>
-      <Form.Control type="text" />
-    </Form.Group>
+const CreateForm = () => {
+  const router = useRouter()
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
 
-    <Form.Group>
-      <Form.Label>Descrição</Form.Label>
-      <Form.Control type="text" />
-    </Form.Group>
+  const sendForm = () => {
+    fetch.post('/api/form1', {
+      name, description
+    })
+      .then(({ data }) => {
+        console.log(data)
+        router.push(`/form1/${data.id}`)
+      })
+      .catch((err) => {
+        console.error(err)
+        alert('Ocorreu um erro!')
+      })
+  }
 
-    <Button variant="primary">
-      Salvar
-    </Button>
-  </Form>
-)
+  return (
+    <Form>
+      <Form.Group>
+        <Form.Label>Nome</Form.Label>
+        <Form.Control type="text" value={name} onChange={(event) => setName(event.target.value)} />
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Descrição</Form.Label>
+        <Form.Control type="text" value={description} onChange={(event) => setDescription(event.target.value)} />
+      </Form.Group>
+
+      <Button variant="primary" onClick={sendForm}>
+        Salvar
+      </Button>
+    </Form>
+  )
+}
 
 export default function Create () {
   return (
