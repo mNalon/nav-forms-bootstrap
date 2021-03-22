@@ -17,7 +17,7 @@ const CreateForm = () => {
       name, description
     })
       .then(({ data }) => {
-        console.log(data)
+        alert('Dados salvos com sucesso!')
         router.push(`/form1/${data.id}`)
       })
       .catch((err) => {
