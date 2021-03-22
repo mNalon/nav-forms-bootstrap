@@ -1,8 +1,9 @@
 let form1Items = Array(15).fill()
+let length = 15
 
 form1Items = form1Items.map(
-  () => ({
-    id: parseInt(Math.random(0, 99999) * 100),
+  (v, index) => ({
+    id: index,
     name: 'loremIpsum loremIpsum',
     description: 'loremIpsum loremIpsumloremIpsum loremIpsum'
   })
@@ -25,7 +26,8 @@ const deleteById = (id) => {
 }
 
 const add = (item) => {
-  const id = parseInt(Math.random(0, 99999) * 100)
+  length = length + 1
+  const id = length
   const createdItem = {
     id,
     ...item
