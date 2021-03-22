@@ -12,7 +12,7 @@ export default (req, res) => {
     return
   }
 
-  if (req.method === 'POST') {
+  if (req.method === 'PUT') {
     const {
       name: newName,
       description: newDescription
